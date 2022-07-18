@@ -1,0 +1,36 @@
+#!/usr/bin/env php
+<?php declare( strict_types = 1 );
+
+/*
+ * This is a front controller for my commands.
+ */
+
+// Initialize environment.
+require dirname( __DIR__ ) . '/bootstrap.php';
+
+use MyCommands\Infrastructure\AppFactory;
+use Symfony\Component\Console\Application;
+
+use const MyCommands\COMMANDS_NAMESPACE;
+use const MyCommands\COMMANDS_PATH;
+
+// Create the Application
+$application = new Application;
+
+// Register all Commands
+$command_list = glob( COMMANDS_PATH . '/*.php' );
+
+$app_factory = new AppFactory( $_SERVER );
+
+foreach ( $command_list as $command_with_path ) {
+    $command_with_path_but_wihtout_namespace = basename( $command_with_path, '.php' );
+    $command                                 = COMMANDS_NAMESPACE . $command_with_path_but_wihtout_namespace;
+
+    $new_command = new $command( );
+    $new_command->addApp( $app_factory );
+
+    $application->add( $new_command );
+}
+
+// Run it
+$application->run();

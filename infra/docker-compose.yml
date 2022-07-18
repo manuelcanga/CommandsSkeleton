@@ -1,0 +1,16 @@
+version: '3.4'
+volumes:
+  vendor:
+
+services:
+  my_commands:
+    container_name: my_commands
+    build:
+      dockerfile: infra/Dockerfile
+      context: ../
+    volumes:
+      - ..:/app
+      - ../vendor:/app/vendor
+    restart: on-failure
+    tty: true
+    stdin_open: true

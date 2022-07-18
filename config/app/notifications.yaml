@@ -1,0 +1,10 @@
+smtp:
+  from_name: Manuel Canga
+  from_email: info@trasweb.net
+  noreply_email: noreply@trasweb.net
+  host: smtp.mandrillapp.com
+  auth: true,
+  auth_type: ssl
+  port: 465
+  user: info@trasweb.net
+  pass: info@trasweb.net

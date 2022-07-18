@@ -1,0 +1,8 @@
+vendor/*
+var/cache/**
+.idea
+composer.lock
+config/user.yaml
+*config.ini
+*user.ini
+.DS_Store
